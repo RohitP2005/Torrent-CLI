@@ -3,7 +3,7 @@
 #include <iostream>
 #include <stdexcept>
 #include <sstream>
-#include <json/json.h>
+#include <stdint.h>
 
 //Constructor
 Torrent::Torrent(const std::string& filePath) : filePath(filePath), totalSize(0){
@@ -21,7 +21,7 @@ std::string Torrent::getTrackerUrl() const{
 }
 
 //Files list retreiver
-std::vector<std::string> Torrent::getfiles() const{
+std::vector<std::string> Torrent::getFiles() const{
   return files;
 }
 
@@ -34,7 +34,9 @@ void Torrent::parseTorrentFile(){
 
   try{
     //Logic to parse bencoded torrent
-  }
+  }catch (const std::exception& e) {
+        std::cerr << "Error parsing torrent file: " << e.what() << std::endl;
+    }
 }
 
 std::string Torrent::readFile(const std::string& path) const{
